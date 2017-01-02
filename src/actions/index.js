@@ -45,6 +45,17 @@ export function signOutUser() {
     return { type: UNAUTH_USER };
 }
 
+export function fetchMessage() {
+    return function(dispatch) {
+        axios.get(ROOT_URL, {
+            headers: { authorization: localStorage.getItem('token')}
+        })
+        .then(response => {
+            console.log(response);
+        });
+    }
+}
+
 export function resetError() {
     return { type: RESET_ERROR };
 }
