@@ -23,6 +23,10 @@ const renderInput = field =>
     </div>
 
 class Signup extends Component {
+    componentWillMount() {
+        this.props.resetError();
+    }
+
     onSubmit({ email, password }) {
         this.props.signUpUser({ email, password });
     }

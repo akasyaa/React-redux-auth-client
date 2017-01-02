@@ -12,6 +12,10 @@ const renderInput = field =>
     </div>
 
 class Signin extends Component {
+    componentWillMount() {
+        this.props.resetError();
+    }
+
     onSubmit({ email, password }) {
         //Authentication
         this.props.signInUser({ email, password });
