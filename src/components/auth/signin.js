@@ -13,7 +13,6 @@ const renderInput = field =>
 
 class Signin extends Component {
     onSubmit({ email, password }) {
-        console.log(email, password);
         //Authentication
         this.props.signInUser({ email, password });
     }

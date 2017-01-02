@@ -24,9 +24,17 @@ const renderInput = field =>
 
 class Signup extends Component {
     onSubmit({ email, password }) {
+        this.props.signUpUser({ email, password });
     }
 
     renderAlert() {
+        if(this.props.errorMsg) {
+            return (
+                <div className="alert alert-danger">
+                    <strong>Oops! </strong>{this.props.errorMsg}
+                </div>
+            );
+        }
     }
 
     render() {
