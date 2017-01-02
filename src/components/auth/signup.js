@@ -3,6 +3,17 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux'
 import * as actions from '../../actions';
 
+const required = value => value ? undefined : 'Required';
+
+const validate = values => {
+    const errors = {};
+    if (values.password !== values.passwordConfirm) {
+        errors.passwordConfirm = 'Please enter matching password.'
+    }
+
+    return errors;
+}
+
 const renderInput = field =>
     <div>
         <input {...field.input} type={field.type} className='form-control' />
@@ -22,20 +33,30 @@ class Signup extends Component {
         const { handleSubmit, pristine, submitting } = this.props;
 
         return(
-            <form onSubmit={handleSubmit(this.onSubmit.bind(this))} className='signin'>
+            <form onSubmit={handleSubmit(this.onSubmit.bind(this))} className='signup'>
                 <div className='form-group'>
                     <label htmlFor='email'>E-mail:</label>
                     <Field
                         name='email'
                         component={renderInput}
-                        type='text' />
+                        type='text'
+                        validate={required} />
                 </div>
                 <div className="form-group">
                     <label htmlFor="password">Password:</label>
                     <Field
                         name="password"
                         component={renderInput}
-                        type="password" />
+                        type="password"
+                        validate={required} />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="passwordConfirm">Confirm Password:</label>
+                    <Field
+                        name="passwordConfirm"
+                        component={renderInput}
+                        type="password"
+                        validate={required} />
                 </div>
                 {this.renderAlert()}
                 <button type="submit" className="btn btn-primary" disabled={pristine || submitting}>Sign up</button>
@@ -49,7 +70,8 @@ function mapStateToProps(state) {
 }
 
 Signup = reduxForm({
-    form: 'signup'
+    form: 'signup',
+    validate
 })(Signup);
 
 export default Signup = connect(mapStateToProps, actions)(Signup);

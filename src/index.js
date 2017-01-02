@@ -11,6 +11,8 @@ import Signout from './components/auth/signout';
 import Signup from './components/auth/signup'
 import reducers from './reducers';
 
+import '../style/style.scss';
+
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 
 ReactDOM.render(
